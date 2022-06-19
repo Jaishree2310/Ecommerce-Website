@@ -1,0 +1,30 @@
+{% extends 'ecommerce/base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+
+<div class="container " style="margin-left:300px;">
+
+    <div class="row">
+      
+         
+       
+        {% for model in electronics %}
+    <div class="card mycard ml-4 mb-3 mt-2" style="width: 18rem;" id="myCard" >
+       
+        <div class="card-body">
+          <img src="{{model.images.url}}" class="card-img-top" alt="...">
+          <h5 class="card-title">{{model.title}}</h5>
+          <p class="card-text">Price :&#x20b9 {{model.price}}</p>
+        
+          <p class="card-text">Discount : {{model.discount}} &percnt;</p>
+          <a href="{% url 'electroniccontent' model.id %}" class="btn btn-primary">Read More</a>
+        </div>
+      </div>
+      {% endfor %}
+    
+    
+</div>
+{% endblock %}

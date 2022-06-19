@@ -1,0 +1,107 @@
+{% extends 'ecommerce/base.html' %}
+ {% load static %} 
+ {% load crispy_forms_tags%} 
+ {% block content %}
+{% if products %}
+<div class="container responsive" style="margin-left: 230px">
+  <table class="table table-borderless">
+    <thead class="text-danger">
+      <tr>
+        <th scope="col" style="margin-left: 23px">#</th>
+        <th scope="col">Image</th>
+        <th scope="col">Product</th>
+        <th scope="col">Per Item Price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Total Price</th>
+        <th scope="col">Discount</th>
+        <th scope="col">Increase Quantity</th>
+        <th scope="col">Cancel</th>
+      </tr>
+    </thead>
+    <tbody id="myTable">
+      {% for product in products %}
+      <tr>
+        <td scope="row" style="margin-left: 23px">{{forloop.counter}}</td>
+        <td>
+          <img
+            src="{{product.pimg.url}}"
+            class="img-fluid"
+            alt="..."
+            style="width: 50px; height: 100px"
+          />
+        </td>
+
+        <td>{{product.title}}</td>
+        <td>{{product.pip}}</td>
+        <td>{{product.quantity}}</td>
+        <td>{{product.price}}</td>
+        <td>{{product.discount}}</td>
+        <td>
+          <a
+            href="{% url 'update-product' product.id %}"
+            class="btn btn-primary"
+          >
+            &#xF4FE;</a
+          >
+        </td>
+        <td>
+          <a href="{% url 'delete-product' product.id %}" class="btn btn-danger"
+            >&times;</a
+          >
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="container text-center">
+    <!-- Button trigger modal -->
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-toggle="modal"
+      data-target="#exampleModal"
+    >
+      Place Order
+    </button>
+  </div>
+</div>
+{% else %}
+<h1 style="margin-left:500px;margin-top:300px;">Nothing is present in your cart to show.</h1>
+{% endif %}
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Place Order</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form method="post">
+        {% csrf_token %}
+        <div class="modal-body">{{form | crispy}}</div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+          <button type="submit" class="btn btn-primary">Order Now</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

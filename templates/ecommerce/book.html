@@ -1,0 +1,30 @@
+{% extends 'ecommerce/base.html' %}
+
+{% load static %}
+
+
+{% block content %}
+
+<div class="container " style="margin-left:300px;">
+
+    <div class="row">
+      
+         
+       
+        {% for book in books %}
+    <div class="card mycard ml-4 mb-3 mt-2" style="width: 18rem;" id="myCard">
+      
+        <div class="card-body">
+          <img src="{{book.images.url}}" class="card-img-top" alt="...">
+          <h5 class="card-title">{{book.title}}</h5>
+          <p class="card-text">Price :&#x20b9 {{book.price}}</p>
+         
+          <p class="card-text">Discount : {{book.discount}} &percnt;</p>
+          <a href="{% url 'bookcontent' book.id %}" class="btn btn-primary">Read More</a>
+        </div>
+      </div>
+      {% endfor %}
+    
+    
+</div>
+{% endblock %}

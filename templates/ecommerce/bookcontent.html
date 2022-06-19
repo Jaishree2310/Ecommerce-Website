@@ -1,0 +1,28 @@
+{% extends 'ecommerce/base.html' %} 
+{% load static %} 
+{% block content %}
+
+<div class="container" style="margin-left: 300px">
+  <div class="card mt-5">
+    <div class="row">
+     <div class="col-md-4">
+        <img src="{{book.images.url}}" class="card-img-top" alt="...">
+     </div>
+     <div class="col-md-8">
+        <h5 class="card-title myfont">{{book.title}}</h5>
+        <p class="card-text myfont">Description {{book.description}}</p>
+        <p class="card-text myfont">Author : {{book.author_name}}</p>
+        <p class="card-text myfont">Publisher : {{book.publisher_name}}</p>
+        <p class="card-text myfont">Published date : {{book.published_date}}</p>
+        <p class="card-text myfont">Book Type : {{book.category}}</p>
+        <p class="card-text myfont">Price :&#x20b9 {{book.price}}</p>
+        <p class="card-text myfont">Quantity Available : {{book.quantity}}</p>
+        <p class="card-text myfont">Discount : {{book.discount}} &percnt;</p>
+        <a href="{% url 'add-to-cart-book' book.id %}" class="btn btn-primary float-center">Add To kart</a>
+     </div>
+
+    </div>
+  </div>
+ 
+</div>
+{% endblock %}

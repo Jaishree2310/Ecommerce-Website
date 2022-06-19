@@ -1,0 +1,28 @@
+{% extends 'ecommerce/base.html' %} 
+{% load static %} 
+{% block content %}
+
+<div class="container" style="margin-left: 300px">
+  <div class="card mt-5">
+    <div class="row">
+     <div class="col-md-4">
+        <img src="{{model.images.url}}" class="card-img-top" alt="...">
+     </div>
+     <div class="col-md-8">
+        <h5 class="card-title myfont">{{model.title}}</h5>
+        <p class="card-text myfont">Description {{model.description}}</p>
+        <p class="card-text myfont">Brand : {{model.brand}}</p>
+        <p class="card-text myfont">Manufacture Date : {{model.manufacture_date}}</p>
+        <p class="card-text myfont">Category : {{model.category}}</p>
+       
+        <p class="card-text myfont">Price :&#x20b9 {{model.price}}</p>
+        <p class="card-text myfont">Quantity Available : {{model.quantity}}</p>
+        <p class="card-text myfont">Discount : {{model.discount}} &percnt;</p>
+        <a href="{% url 'add-to-cart-electronic' model.id %}" class="btn btn-primary float-center">Add To Cart</a>
+     </div>
+
+    </div>
+  </div>
+ 
+</div>
+{% endblock %}
